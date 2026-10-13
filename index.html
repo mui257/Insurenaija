@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#071c2c">
+  <title>InsureNaija | Insurance Management</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <a href="#" class="brand"><span class="brand-icon">🛡️</span><span>Insure<span class="green">Naija</span></span></a>
+    <button id="menuBtn" class="menu-btn" aria-label="Open navigation">☰</button>
+    <div class="user-info"><span class="avatar">IN</span><span>My Account</span></div>
+  </header>
+  <div class="layout">
+    <aside class="sidebar" id="sidebar">
+      <p class="nav-label">MAIN MENU</p>
+      <button class="nav-item active" data-page="dashboard">🏠 Dashboard</button>
+      <button class="nav-item" data-page="policies">📋 My Policies</button>
+      <button class="nav-item" data-page="claims">📑 Claims</button>
+      <button class="nav-item" data-page="verify">✅ Verify Policy</button>
+      <button class="nav-item" data-page="documents">📁 Documents</button>
+      <button class="nav-item" data-page="insurance">🔍 Explore Insurance</button>
+      <div class="sidebar-bottom"><p>INSURENAIJA</p><small>Insurance made simple.</small></div>
+    </aside>
+    <main class="main-content">
+      <section id="dashboard" class="page active">
+        <div class="welcome">
+          <div><p class="eyebrow">YOUR INSURANCE, SIMPLIFIED</p><h1>Welcome to InsureNaija 👋</h1><p>Manage your insurance policies and claims in one place.</p></div>
+          <button class="primary-btn" data-go="insurance">+ Explore Insurance</button>
+        </div>
+        <div class="stats-grid">
+          <div class="stat-card"><span class="stat-icon blue">📋</span><p>My Policies</p><h2 id="policyCount">0</h2><small>Saved policies</small></div>
+          <div class="stat-card"><span class="stat-icon orange">📑</span><p>My Claims</p><h2 id="claimCount">0</h2><small>Claims submitted</small></div>
+          <div class="stat-card"><span class="stat-icon green-bg">⏰</span><p>Expiring Soon</p><h2 id="expiringCount">0</h2><small>Next 30 days</small></div>
+          <div class="stat-card"><span class="stat-icon purple">📁</span><p>Documents</p><h2 id="documentCount">0</h2><small>Saved documents</small></div>
+        </div>
+        <div class="section-heading"><div><h2>Insurance Services</h2><p>Choose the protection you need.</p></div></div>
+        <div class="insurance-grid">
+          <article class="insurance-card"><span class="service-icon">🚗</span><h3>Motor Insurance</h3><p>Explore vehicle insurance options and manage policy records.</p><button data-insurance="Motor">Explore →</button></article>
+          <article class="insurance-card"><span class="service-icon">❤️</span><h3>Health Insurance</h3><p>Keep your health coverage information accessible.</p><button data-insurance="Health">Explore →</button></article>
+          <article class="insurance-card"><span class="service-icon">👨‍👩‍👧</span><h3>Life Insurance</h3><p>Learn about life protection and family financial security.</p><button data-insurance="Life">Explore →</button></article>
+          <article class="insurance-card"><span class="service-icon">🚢</span><h3>Marine Insurance</h3><p>Explore protection options for cargo and shipments.</p><button data-insurance="Marine">Explore →</button></article>
+          <article class="insurance-card"><span class="service-icon">🌾</span><h3>Agricultural Insurance</h3><p>Explore insurance for eligible farming activities and risks.</p><button data-insurance="Agricultural">Explore →</button></article>
+          <article class="insurance-card"><span class="service-icon">🏢</span><h3>Business Insurance</h3><p>Explore options for protecting business assets and operations.</p><button data-insurance="Business">Explore →</button></article>
+        </div>
+        <div class="section-heading"><div><h2>Recent Claims</h2><p>Track the status of your submitted claims.</p></div><button class="text-btn" data-go="claims">View all →</button></div>
+        <div id="recentClaims" class="panel"><p class="empty-state">No claims submitted yet.</p></div>
+      </section>
+      <section id="policies" class="page"><div class="page-heading"><h1>My Policies</h1><p>Keep track of your insurance policy records.</p></div><div class="panel"><div class="panel-heading"><h2>Saved Policies</h2><button class="primary-btn" id="addPolicyBtn">+ Add Policy</button></div><div id="policiesList"></div></div></section>
+      <section id="claims" class="page"><div class="page-heading"><h1>Insurance Claims</h1><p>Submit a claim and monitor its recorded status.</p></div><div class="panel"><h2>Submit a Claim</h2><form id="claimForm">
+        <label>Policy Number<input id="claimPolicy" required placeholder="e.g. DEMO-1001"></label>
+        <label>Insurance Type<select id="claimType" required><option value="">Select insurance type</option><option>Motor</option><option>Health</option><option>Life</option><option>Marine</option><option>Agricultural</option><option>Business</option></select></label>
+        <label>Incident Date<input id="incidentDate" type="date" required></label>
+        <label>Describe the incident<textarea id="claimDescription" rows="4" required placeholder="Describe what happened..."></textarea></label>
+        <label>Supporting Document (optional)<input id="claimFile" type="file" accept=".pdf,.jpg,.jpeg,.png"></label>
+        <button class="primary-btn" type="submit">Submit Claim</button>
+      </form></div><div class="panel"><h2>Claim History</h2><div id="claimsList"></div></div></section>
+      <section id="verify" class="page"><div class="page-heading"><h1>Verify Insurance Policy</h1><p>Check a policy against the demo records saved in this app.</p></div><div class="panel verification-panel"><span class="large-icon">🔐</span><h2>Policy Verification</h2><p>Enter a policy number saved in your InsureNaija demo account.</p><form id="verifyForm"><label>Policy Number<input id="verifyNumber" required placeholder="Enter policy number"></label><button type="submit" class="primary-btn">Check Record</button></form><div id="verificationResult" aria-live="polite"></div><p class="notice">Demo only: this check does not authenticate a policy with an insurer, confirm payment, or establish that a policy is valid.</p></div></section>
+      <section id="documents" class="page"><div class="page-heading"><h1>My Documents</h1><p>Save and organize insurance-related documents on this device.</p></div><div class="panel"><h2>Add a Document</h2><form id="documentForm"><label>Document Name<input id="documentName" required placeholder="e.g. Motor policy certificate"></label><label>Choose File<input id="documentFile" type="file" accept=".pdf,.jpg,.jpeg,.png" required></label><p class="notice">Files are saved locally in this browser. This prototype has no secure cloud backup.</p><button class="primary-btn" type="submit">Save Document</button></form></div><div class="panel"><h2>Saved Documents</h2><div id="documentsList"></div></div></section>
+      <section id="insurance" class="page"><div class="page-heading"><h1>Explore Insurance</h1><p>Learn about common insurance products available in Nigeria.</p></div><div class="panel"><label>Choose a category<select id="insuranceFilter"><option value="All">All categories</option><option value="Motor">Motor</option><option value="Health">Health</option><option value="Life">Life</option><option value="Marine">Marine</option><option value="Agricultural">Agricultural</option><option value="Business">Business</option></select></label><div id="insuranceCatalogue" class="catalogue"></div></div></section>
+      <footer><p>© 2026 InsureNaija. Insurance information made accessible.</p><small>This prototype is not an insurance company or an official policy verification service.</small></footer>
+    </main>
+  </div>
+  <dialog id="policyDialog"><form id="policyForm"><div class="panel-heading"><h2>Add Insurance Policy</h2><button type="button" id="closeDialog" class="close-btn">✕</button></div>
+    <label>Insurance Type<select id="policyType" required><option value="">Select type</option><option>Motor</option><option>Health</option><option>Life</option><option>Marine</option><option>Agricultural</option><option>Business</option></select></label>
+    <label>Policy Number<input id="policyNumber" required placeholder="Enter policy number"></label><label>Insurance Provider<input id="policyProvider" required placeholder="Enter provider name"></label><label>Expiry Date<input id="policyExpiry" type="date" required></label>
+    <button class="primary-btn full-width" type="submit">Save Policy</button><p class="notice">Saving a record here does not purchase or validate insurance.</p>
+  </form></dialog>
+  <div id="toast" role="status" aria-live="polite"></div>
+  <script src="script.js"></script>
+</body>
+</html>
